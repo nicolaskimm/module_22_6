@@ -16,5 +16,9 @@ router.route('/posts/:cuid').delete(PostController.deletePost);
 
 router.route('/posts/:cuid').put(PostController.editPost);
 
+router.route('/posts/:cuid').put(PostController.thumbUpPost);
+
+router.route('/posts/:cuid').put(PostController.thumbDownPost);
 
 export default router;
+

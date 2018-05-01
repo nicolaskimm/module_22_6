@@ -35,6 +35,7 @@ export function addPost(req, res) {
   newPost.title = sanitizeHtml(newPost.title);
   newPost.name = sanitizeHtml(newPost.name);
   newPost.content = sanitizeHtml(newPost.content);
+  newPost.votes = 0;
 
   newPost.slug = slug(newPost.title.toLowerCase(), { lowercase: true });
   newPost.cuid = cuid();
@@ -81,6 +82,24 @@ export function deletePost(req, res) {
 
 export function editPost(req, res) {
   Post.update({ cuid: req.params.cuid }, req.body.post).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
+
+export function thumbUpPost(req, res) {
+  Post.update({ cuid: req.params.cuid }, {votes: +1}).exec((err, post) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ post });
+  });
+}
+
+export function thumbDownPost(req, res) {
+  Post.update({ cuid: req.params.cuid }, {votes: -1}).exec((err, post) => {
     if (err) {
       res.status(500).send(err);
     }

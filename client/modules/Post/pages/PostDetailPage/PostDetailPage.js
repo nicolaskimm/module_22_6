@@ -20,6 +20,7 @@ export class PostDetailPage extends React.Component {
       name: this.props.post.name,
       title: this.props.post.title,
       content: this.props.post.content,
+      votes: this.props.post.votes,
     };
   }
 
@@ -54,6 +55,7 @@ export class PostDetailPage extends React.Component {
         <h3 className={styles['post-title']}>{this.props.post.title}</h3>
         <p className={styles['author-name']}><FormattedMessage id="by" /> {this.props.post.name}</p>
         <p className={styles['post-desc']}>{this.props.post.content}</p>
+        <p>Votes: {this.props.post.votes}</p>
       </div>
     );
   };
